@@ -11,7 +11,13 @@ export default function Home() {
         className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
       >
         Zur neuen Seite
-      </Link>
+      </Link> 
+      <Link
+        href="/third"
+        className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
+      >
+        Zur Tiervorlage Seite
+      </Link> 
         <Image
           className="dark:invert h-5 w-[100px]"
           src="/next.svg"
