@@ -1,26 +1,385 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #173d33;
+  --muted: #5d7469;
+  --green: #28634d;
+  --line: #d5e3d8;
+  --font-friendly: "Trebuchet MS", "Avenir Next", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  margin: 0;
+  color: var(--ink);
+  background-color: #f5f9ed;
+  background-image:
+    linear-gradient(180deg, rgb(225 244 249 / 92%) 0, rgb(245 249 237 / 94%) 390px, #f5f9ed 100%),
+    repeating-linear-gradient(135deg, transparent 0 28px, rgb(40 99 77 / 3%) 28px 29px);
+  font-family: var(--font-friendly);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.page-shell {
+  width: min(100% - 40px, 1080px);
+  margin: 0 auto;
+  padding: 60px 0 72px;
+}
+
+.page-heading {
+  margin: 0 auto 38px;
+  text-align: center;
+  animation: appear 500ms ease-out both;
+}
+
+.eyebrow,
+.panel-kicker {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.page-heading h1 {
+  color: #194d3b;
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  line-height: 1.05;
+}
+
+.page-intro {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 18px;
+  animation: appear 600ms 100ms ease-out both;
+}
+
+.info-panel {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid rgb(35 83 62 / 12%);
+  border-radius: 8px;
+  box-shadow: 0 8px 22px rgb(34 79 57 / 6%);
+}
+
+.weather-panel {
+  background: #fffdf6;
+}
+
+.tips-panel {
+  background: #f1f7e7;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 23px;
+}
+
+.panel-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 8px;
+  font-size: 1.55rem;
+}
+
+.weather-icon {
+  background: #ffedb3;
+}
+
+.tips-icon {
+  background: #d9edc7;
+}
+
+.panel-kicker {
+  margin-bottom: 5px;
+}
+
+.panel-heading h2,
+.insects-heading h2 {
+  font-size: 1.38rem;
+  line-height: 1.2;
+}
+
+.weather-readings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.reading {
+  min-width: 0;
+  padding: 14px 12px;
+  border-left: 2px solid #9cc793;
+  background: #f4f7eb;
+}
+
+.reading dt {
+  min-height: 2.5em;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+
+.reading dd {
+  margin: 7px 0 0;
+  color: #194d3b;
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.reading dd span {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.tip-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tip-list li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+}
+
+.tip-number {
+  color: #b45c36;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.tip-list p {
+  color: #35564a;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.section-divider {
+  height: 1px;
+  margin: 34px 0 30px;
+  border: 0;
+  background: var(--line);
+}
+
+.insects-section {
+  animation: appear 600ms 180ms ease-out both;
+}
+
+.insects-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.insects-heading h2 {
+  font-size: 1.55rem;
+}
+
+.insect-count {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #e4efda;
+  color: #3c684f;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.insect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 22px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.insect-item {
+  min-width: 0;
+  text-align: center;
+}
+
+.insect-picture {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgb(35 83 62 / 10%);
+  border-radius: 8px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.insect-picture span {
+  display: block;
+  font-size: clamp(3.2rem, 6vw, 4.3rem);
+  line-height: 1;
+  filter: drop-shadow(0 4px 2px rgb(30 54 40 / 12%));
+  transition: transform 180ms ease;
+}
+
+.insect-item:hover .insect-picture {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgb(34 79 57 / 12%);
+}
+
+.insect-item:hover .insect-picture span {
+  transform: rotate(-7deg) scale(1.06);
+}
+
+.insect-item p {
+  margin-top: 9px;
+  color: #315544;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.butterfly {
+  background: #e8e4ff;
+}
+
+.ladybird {
+  background: #ffe7d9;
+}
+
+.bee {
+  background: #fff0bd;
+}
+
+.ant {
+  background: #f2e6dc;
+}
+
+.caterpillar {
+  background: #dcf0d3;
+}
+
+.grasshopper {
+  background: #e0f0c9;
+}
+
+.beetle {
+  background: #d9edeb;
+}
+
+.fly {
+  background: #e1eafa;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 760px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-shell {
+    padding-top: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-shell {
+    width: min(100% - 28px, 1080px);
+    padding-top: 34px;
+  }
+
+  .page-heading {
+    margin-bottom: 28px;
+  }
+
+  .page-intro {
+    max-width: 290px;
+    margin: 10px auto 0;
+    font-size: 0.95rem;
+  }
+
+  .info-panel {
+    padding: 19px;
+  }
+
+  .weather-readings {
+    gap: 7px;
+  }
+
+  .reading {
+    padding: 11px 8px;
+  }
+
+  .reading dt {
+    font-size: 0.73rem;
+  }
+
+  .reading dd {
+    font-size: 1.5rem;
+  }
+
+  .reading dd span {
+    font-size: 0.85rem;
+  }
+
+  .insect-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+
+  .insects-heading h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
