@@ -1,5 +1,5 @@
 import Image from "next/image";
-import MyFeat from "./feature/myfeat";
+import Link from "next/link";import MyFeat from "./feature/myfeat";
 
 export default function Home() {
   return (
@@ -15,6 +15,13 @@ export default function Home() {
     <a href="/feature/myfeat.tsx">Link</a>
      
     </div>
+          <Link
+        href="/second"
+        className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
+      >
+        Zur neuen Seite
+      </Link>
     </div>
+    
   );
 }
