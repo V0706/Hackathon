@@ -1,23 +1,32 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/link";import MyFeat from "./feature/myfeat";
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        
-
-      <Link
+    <div><div>
+      <h1>Name-Name</h1>
+    </div>
+    <div style={{ height: '500px' }}>
+      <ul>
+        <li><h3>Temperatur:</h3><h3> 20°C</h3></li>
+        <li><h3>Luftfeuchtigkeit:</h3><h3> 50%</h3></li>
+        <li><h3>Bodenfeuchtigkeit:</h3><h3> 60%</h3></li>
+      </ul>
+    <a href="/feature/myfeat.tsx">Link</a>
+     
+    </div>
+          <Link
         href="/second"
         className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
       >
         Zur neuen Seite
-      </Link> 
+      </Link>
       <Link
         href="/third"
         className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
       >
-        Zur Tiervorlage Seite
-      </Link> 
+        Zur neuen Seite
+      </Link>
         <Image
           className="dark:invert h-5 w-[100px]"
           src="/next.svg"
@@ -79,7 +88,9 @@ export default function Home() {
           <a>href="</a>
 
         </div>
-      </main>
-    </div>
+        </div>
+      
+    
+    
   );
 }
