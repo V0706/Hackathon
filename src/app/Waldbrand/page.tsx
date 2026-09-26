@@ -6,7 +6,7 @@ export default function SecondPage() {
       <div className="mx-auto max-w-6xl">
         <header className="mb-10 text-center sm:mb-14">
           <h1 className="text-4xl font-semibold leading-tight text-[#6e302e] sm:text-5xl">Waldbrände</h1>
-          <h2 className="mx-auto mt-4 max-w-xl text-sm leading-6 text-[#826462] sm:text-base">Gefahr für Pflanzen und Tiere.</h2>
+          <h2 className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-[#826462] sm:text-base">Gefahr für Pflanzen und Tiere.</h2>
         </header>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
