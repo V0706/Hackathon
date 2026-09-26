@@ -86,19 +86,19 @@ export default function Home() {
           </div>
           <span className="insect-count">{insects.length} entdeckt</span>
           <Link
-        href="/feuer"
+        href="/Waldbrand"
         className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
       >
-        Zur feuer Seite
+        Zur Waldbrand Seite
       </Link>
       <Link
-        href="/second"
+        href="/Wetter"
         className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
       >
         Zur wetter Seite
       </Link>
       <Link
-        href="/third"
+        href="/Tiere"
         className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
       >
         Zur tier Seite
