@@ -14,6 +14,7 @@ const tips = [
   "Bienen besuchen am liebsten offene Blüten.",
   "Nach Regen lohnt sich ein Blick unter große Blätter.",
 ];
+import Link from "next/link";
 
 export default function Home() {
   return (

@@ -8,12 +8,23 @@ export default function SecondPage() {
        Die aktuellen Wetterdaten aus dem Wald:
       </p>
       <div>
-        <p>Temperatur:</p></div>
-      
+        <p>Temperatur:</p>
+      </div>
+      <div>
         <p>Luftfeuchtigkeit:</p>
+      </div>
+      <div>
         <p>Bodenfeuchtigkeit:</p>
-        <p>Luftfeuchtigkeit:</p>
+      </div>
+      <div>
         <p>Helligkeit:</p>
+      </div>
+      <div>
+        <p></p>
+      </div>
+      <div>
+        <p></p>
+      </div>
 
       <Link
         href="/"
