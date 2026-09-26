@@ -1,56 +1,17 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-
-type MqttStatus = {
-  connected: boolean;
-  error?: string;
-};
-
-type ReadingMap = Record<string, string>;
-
-const metricAliases = {
-  temperature: ["garten/status/temperatur", "garten/status/temp", "temperatur"],
-  humidity: ["garten/status/feuchtigkeit", "garten/status/luftfeuchtigkeit", "luftfeuchtigkeit"],
-  soil: ["garten/status/bodenfeuchte", "garten/status/bodenfeuchtigkeit", "bodenfeuchte", "bodenfeuchtigkeit"],
-  flame: ["garten/status/flamme", "garten/status/flammen", "garten/status/fire", "flammensensor", "flame"],
-} as const;
+import { useMemo } from "react";
+import { useMqttSensorData } from "../MqttSensorProvider";
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-function resolveValue(values: ReadingMap, aliases: readonly string[]) {
-  for (const alias of aliases) {
-    const value = values[alias];
-    if (value !== undefined) return value;
-  }
-  return undefined;
-}
-
-function parseNumber(value: string | undefined) {
-  if (value === undefined) return undefined;
-
-  const parsed = Number.parseFloat(value.replace(",", "."));
-  return Number.isFinite(parsed) ? parsed : undefined;
-}
-
-function parseFlame(value: string | undefined) {
-  if (value === undefined) return undefined;
-
-  const normalized = value.trim().toLowerCase();
-  if (["1", "true", "on", "yes", "detected", "fire", "flamme", "flammend"].includes(normalized)) {
-    return true;
-  }
-  if (["0", "false", "off", "no", "normal", "none", "leer"].includes(normalized)) {
-    return false;
-  }
-  return undefined;
-}
-
-function computeRisk(values: ReadingMap) {
-  const temperature = parseNumber(resolveValue(values, metricAliases.temperature));
-  const humidity = parseNumber(resolveValue(values, metricAliases.humidity));
-  const soilMoisture = parseNumber(resolveValue(values, metricAliases.soil));
-  const flame = parseFlame(resolveValue(values, metricAliases.flame));
+function computeRisk(values: {
+  temperature: number | undefined;
+  humidity: number | undefined;
+  soilMoisture: number | undefined;
+  flame: boolean | undefined;
+}) {
+  const { temperature, humidity, soilMoisture, flame } = values;
 
   if (temperature === undefined && humidity === undefined && soilMoisture === undefined && flame === undefined) {
     return {
@@ -122,41 +83,17 @@ function computeRisk(values: ReadingMap) {
   };
 }
 
-export default function MqttWaldbrandGefahr() {
-  const [values, setValues] = useState<ReadingMap>({});
-  const [status, setStatus] = useState("Verbinde mit Sensor...");
-
-  useEffect(() => {
-    const events = new EventSource("/api/mqtt");
-
-    events.addEventListener("status", (event) => {
-      const nextStatus = JSON.parse((event as MessageEvent<string>).data) as MqttStatus;
-      setStatus(
-        nextStatus.connected
-          ? "Sensor verbunden"
-          : nextStatus.error
-            ? `Verbindungsfehler: ${nextStatus.error}`
-            : "Sensor nicht verbunden",
-      );
-    });
-
-    events.addEventListener("reading", (event) => {
-      const reading = JSON.parse((event as MessageEvent<string>).data) as {
-        topic: string;
-        payload: string;
-      };
-
-      setValues((current) => ({
-        ...current,
-        [reading.topic]: reading.payload,
-      }));
-    });
-
-    events.onerror = () => setStatus("Verbindung wird wiederhergestellt...");
-    return () => events.close();
-  }, []);
-
-  const risk = useMemo(() => computeRisk(values), [values]);
+export default function MqttWaldbrandGefahr({ detailed = false }: { detailed?: boolean }) {
+  const { averages, fireDetected, status } = useMqttSensorData();
+  const risk = useMemo(
+    () => computeRisk({
+      temperature: averages.temperature,
+      humidity: averages.humidity,
+      soilMoisture: averages.soilMoisture,
+      flame: fireDetected,
+    }),
+    [averages, fireDetected],
+  );
 
   const dangerLevels = [1, 2, 3, 4, 5];
 
@@ -210,6 +147,29 @@ export default function MqttWaldbrandGefahr() {
           />
         ))}
       </div>
+
+      {detailed && (
+        <dl aria-label="Durchschnittliche Eingangswerte der Waldbrandberechnung" className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-[#eee7dc] pt-5 sm:grid-cols-4">
+          <div>
+            <dt className="text-xs text-[#81776b]">Temperatur</dt>
+            <dd className="mt-1 font-semibold text-[#403326]">{risk.temperature === undefined ? "--" : `${risk.temperature.toFixed(1)} °C`}</dd>
+          </div>
+          <div>
+            <dt className="text-xs text-[#81776b]">Luftfeuchtigkeit</dt>
+            <dd className="mt-1 font-semibold text-[#403326]">{risk.humidity === undefined ? "--" : `${risk.humidity.toFixed(1)} %`}</dd>
+          </div>
+          <div>
+            <dt className="text-xs text-[#81776b]">Bodenfeuchtigkeit</dt>
+            <dd className="mt-1 font-semibold text-[#403326]">{risk.soilMoisture === undefined ? "--" : `${risk.soilMoisture.toFixed(1)} %`}</dd>
+          </div>
+          <div>
+            <dt className="text-xs text-[#81776b]">Feuer</dt>
+            <dd className={`mt-1 font-semibold ${risk.flame ? "text-[#a33b32]" : "text-[#403326]"}`}>
+              {risk.flame === undefined ? "--" : risk.flame ? "Flamme erkannt" : "Keine Flamme"}
+            </dd>
+          </div>
+        </dl>
+      )}
 
       <p className="mt-auto pt-5 text-xs text-[#9a8e80]">
         {risk.ready ? `${risk.label} · live berechnet` : "Warte auf Messdaten"}

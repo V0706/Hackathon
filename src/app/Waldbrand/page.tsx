@@ -13,7 +13,7 @@ export default function SecondPage() {
         </header>
 
         <div className="mb-8">
-          <MqttWaldbrandGefahr />
+          <MqttWaldbrandGefahr detailed />
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -24,17 +24,6 @@ export default function SecondPage() {
           <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
             <h2 className="text-xl font-semibold text-[#4a302e]">Wie kann man Waldbrände verhindern?</h2>
             <p className="mt-3 text-sm leading-6 text-[#77615e]">Um Waldbrände zu verhindern, ist es wichtig, vorsichtig mit Feuer umzugehen, keine offenen Flammen in Waldgebieten zu verwenden und auf die Einhaltung von Brandschutzvorschriften zu achten. Außerdem sollten Fahrzeuge nicht auf trockenen Wiesen oder Waldboden geparkt werden.</p>
-          </div>
-          <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
-            <h2 className="text-xl font-semibold text-[#4a302e]">Welche Bedingungen für Waldbrände sind aktuellerfüllt?</h2>
-            <p className="mt-3 text-sm leading-6 text-[#77615e]">Hohe Temperaturenn:</p>
-            <p className="mt-3 text-sm leading-6 text-[#77615e]">Geringe Luftfeuchtigkeit:</p>
-            <p className="mt-3 text-sm leading-6 text-[#77615e]">Dürre:</p>
-     
-          </div>
-          <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
-            <h2 className="text-xl font-semibold text-[#4a302e]">Brennt es gerade?</h2>
-            <p className="mt-3 text-sm leading-6 text-[#77615e]">Platzhalter für Sensor:</p>
           </div>
         </div>
 

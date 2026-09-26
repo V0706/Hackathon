@@ -2,7 +2,7 @@ import mqtt, { type MqttClient } from "mqtt";
 
 export const runtime = "nodejs";
 
-const topicFilter = "garten/status/#";
+const topicFilters = ["Garten/#", "garten/status/#"];
 const encoder = new TextEncoder();
 
 type Reading = {
@@ -49,7 +49,7 @@ function connectToMqtt() {
   client.on("connect", () => {
     connectionStatus = { connected: true };
     broadcast("status", connectionStatus);
-    client?.subscribe(topicFilter, (error) => {
+    client?.subscribe(topicFilters, (error) => {
       if (error) {
         connectionStatus = { connected: false, error: error.message };
         broadcast("status", connectionStatus);

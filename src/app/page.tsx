@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import FoodChainCycle from "./FoodChainCycle";
 import MqttStartseitenwerte from "./MqttStartseitenwerte";
 import MqttWaldbrandGefahr from "./Waldbrand/MqttWaldbrandGefahr";
+import TierGalerie from "./TierGalerie";
 
 export const metadata: Metadata = {
   title: "Waldmonitor | Waldanalyse",
-  description: "Übersicht zu Wetterdaten, Waldbrandgefahr und Tierbeobachtungen.",
+  description: "Übersicht zu Wetterdaten, Waldbrandgefahr und Artenvielfalt im Wald.",
 };
 
 export default function Home() {
@@ -25,7 +27,7 @@ export default function Home() {
             Wald<span className="text-[#66866b]">monitor</span>
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base leading-6 text-[#5d6b63]">
-            Wetter, Waldbrandgefahr und Tierbeobachtungen auf einen Blick.
+            Wetter und Waldbrandgefahr im Überblick. Entdecke die Artenvielfalt im Wald.
           </p>
           <p className="mx-auto mt-5 inline-flex items-center gap-2 rounded-full border border-[#d8e2d8] bg-white/75 px-3 py-1.5 text-xs text-[#65736b]">
             <span className="size-2 rounded-full bg-[#cb9651]" aria-hidden="true" />
@@ -34,11 +36,11 @@ export default function Home() {
         </header>
 
         <section
-          aria-label="Beobachtungsgebiet Nordhang"
+          aria-label="Beobachtungsgebiet Eggegebirge"
           className="relative mb-6 flex min-h-[170px] items-center overflow-hidden rounded-lg bg-[#1d3b2e] shadow-[0_14px_34px_rgba(25,52,38,0.18)]"
         >
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="forest-pan absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage:
                 "linear-gradient(90deg, rgba(14, 37, 27, 0.9) 0%, rgba(18, 47, 33, 0.68) 48%, rgba(18, 47, 33, 0.12) 100%), url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2200&q=85')",
@@ -47,8 +49,8 @@ export default function Home() {
           <div className="relative z-10 flex w-full items-end justify-between gap-8 px-9 py-7 text-white">
             <div>
               <p className="mb-2 text-xs font-bold uppercase text-[#c2d5c4]">Beobachtungsgebiet · Sektor 04</p>
-              <h2 className="font-serif text-3xl font-semibold">Nordhang-Mischwald</h2>
-              <p className="mt-2 text-sm text-white/75">Sensorstation WM-04 <span className="mx-2 text-white/40">/</span> Höhenlage 640 m</p>
+              <h2 className="font-serif text-3xl font-semibold">Eggegebirge</h2>
+              <p className="mt-2 text-sm text-white/75">Sensorstation WM-04 <span className="mx-2 text-white/40">/</span> Höhenlage 253 m</p>
             </div>
             <div className="flex shrink-0 items-center gap-3 rounded-md border border-white/20 bg-black/25 px-4 py-3 backdrop-blur-sm">
               <span className="relative flex size-2.5">
@@ -57,15 +59,15 @@ export default function Home() {
               </span>
               <div>
                 <p className="text-xs font-semibold text-white">MQTT-Sensor</p>
-                <p className="mt-0.5 text-[11px] text-white/65">garten/status/#</p>
+                <p className="mt-0.5 text-[11px] text-white/65">Garten/# · 3 Boards</p>
               </div>
             </div>
           </div>
         </section>
-
+z
         <section
           aria-label="Waldübersicht"
-          className="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-3"
+          className="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-2"
         >
           <Link
             href="/Wetter"
@@ -88,7 +90,10 @@ export default function Home() {
             <MqttStartseitenwerte />
           </Link>
 
-          <div className="group min-h-[370px] rounded-lg border border-t-4 border-[#e8dfd1] border-t-[#b67b48] bg-[#fffdfa] p-3 shadow-[0_12px_32px_rgba(70,51,31,0.09)] transition duration-200 hover:-translate-y-1 hover:border-[#c7a478] hover:shadow-[0_18px_36px_rgba(70,51,31,0.14)]">
+          <Link
+            href="/Waldbrand"
+            className="group block min-h-[370px] rounded-lg border border-t-4 border-[#e8dfd1] border-t-[#b67b48] bg-[#fffdfa] p-3 shadow-[0_12px_32px_rgba(70,51,31,0.09)] transition duration-200 hover:-translate-y-1 hover:border-[#c7a478] hover:shadow-[0_18px_36px_rgba(70,51,31,0.14)]"
+          >
             <div className="mb-3 flex items-center justify-between gap-4">
               <span className="grid size-12 place-items-center rounded-md bg-[#f7ead8] text-[#a66d36]">
                 <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" className="size-7" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
@@ -96,35 +101,17 @@ export default function Home() {
                   <path d="M16.2 17.5c.4 2.3-2.1 3.4-2.1 5.2a2.9 2.9 0 0 0 5.8 0c0-1.8-1.2-3.4-3.7-5.2Z" />
                 </svg>
               </span>
-              <Link href="/Waldbrand" className="mt-1 text-[#988d7e] transition-transform group-hover:translate-x-1" aria-label="Zur Waldbrandseite">
+              <span className="mt-1 text-[#988d7e] transition-transform group-hover:translate-x-1" aria-hidden="true">
                 ↗
-              </Link>
+              </span>
             </div>
             <MqttWaldbrandGefahr />
-          </div>
-
-          <Link
-            href="/Tiere"
-            className="group flex min-h-[370px] flex-col rounded-lg border border-t-4 border-[#dce4e1] border-t-[#4e8177] bg-[#fbfdfc] p-7 shadow-[0_12px_32px_rgba(33,58,43,0.09)] transition duration-200 hover:-translate-y-1 hover:border-[#8ba99c] hover:shadow-[0_18px_36px_rgba(33,58,43,0.14)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#52766a]"
-          >
-            <div className="mb-7 flex items-start justify-between gap-4">
-              <span className="grid size-12 place-items-center rounded-md bg-[#e4efec] text-[#477568]">
-                <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" className="size-7" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M10.2 17.5c-2.8 0-5.2 3-5.2 5.6 0 1.7 1 2.8 2.7 2.8 2.2 0 4.5-2 8.3-2s6.1 2 8.3 2c1.7 0 2.7-1.1 2.7-2.8 0-2.6-2.4-5.6-5.2-5.6-2.2 0-3.7 1.9-6 1.9s-3.8-1.9-6-1.9Z" />
-                  <ellipse cx="8" cy="11" rx="2.2" ry="2.8" transform="rotate(-25 8 11)" />
-                  <ellipse cx="13.3" cy="8.5" rx="2.1" ry="2.7" transform="rotate(-10 13.3 8.5)" />
-                  <ellipse cx="18.7" cy="8.5" rx="2.1" ry="2.7" transform="rotate(10 18.7 8.5)" />
-                  <ellipse cx="24" cy="11" rx="2.2" ry="2.8" transform="rotate(25 24 11)" />
-                </svg>
-              </span>
-              <span className="mt-1 text-[#82918b] transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
-            </div>
-            <p className="mb-2 text-xs font-bold uppercase text-[#638078]">Fauna &amp; Bewegung</p>
-            <h2 className="text-xl font-semibold text-[#203b34]">Tiere im Wald</h2>
-            <p className="mt-2 text-sm text-[#697770]">Aktivität im Beobachtungsgebiet</p>
-            <p className="mt-auto pt-5 text-xs text-[#89948e]">Mehr Details auf der Tierseite</p>
           </Link>
+
         </section>
+
+        <TierGalerie />
+        <FoodChainCycle />
       </div>
     </main>
   );

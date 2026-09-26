@@ -1,53 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-type MqttReading = {
-  topic: string;
-  payload: string;
-  receivedAt: string;
-};
-
-type MqttStatus = {
-  connected: boolean;
-  error?: string;
-};
+import { useMqttSensorData, type SensorMetric } from "../MqttSensorProvider";
 
 const metrics = [
-  { topic: "garten/status/temperatur", label: "Temperatur", unit: "°C" },
-  { topic: "garten/status/feuchtigkeit", label: "Luftfeuchtigkeit", unit: "%" },
-  { topic: "garten/status/licht", label: "Helligkeit", unit: "" },
+  { key: "temperature", label: "Temperatur", unit: "°C" },
+  { key: "humidity", label: "Luftfeuchtigkeit", unit: "%" },
+  { key: "soilMoisture", label: "Bodenfeuchtigkeit", unit: "%" },
+  { key: "light", label: "Licht", unit: "lx" },
+  { key: "fire", label: "Feuer", unit: "" },
 ];
 
 export default function MqttWetterwerte() {
-  const [readings, setReadings] = useState<MqttReading[]>([]);
-  const [status, setStatus] = useState("Verbinde mit Sensor...");
-
-  useEffect(() => {
-    const events = new EventSource("/api/mqtt");
-
-    events.addEventListener("status", (event) => {
-      const nextStatus = JSON.parse((event as MessageEvent<string>).data) as MqttStatus;
-      setStatus(
-        nextStatus.connected
-          ? "Verbunden"
-          : nextStatus.error
-            ? `Verbindungsfehler: ${nextStatus.error}`
-            : "Verbindung getrennt",
-      );
-    });
-
-    events.addEventListener("reading", (event) => {
-      const reading = JSON.parse((event as MessageEvent<string>).data) as MqttReading;
-      setReadings((current) => [
-        reading,
-        ...current.filter((item) => item.topic !== reading.topic),
-      ]);
-    });
-
-    events.onerror = () => setStatus("Verbindung wird wiederhergestellt...");
-    return () => events.close();
-  }, []);
+  const { averages, sampleCounts, fireDetected, fireBoards, boardCount, status } = useMqttSensorData();
 
   return (
     <section className="w-full max-w-5xl text-left" aria-live="polite">
@@ -58,20 +22,32 @@ export default function MqttWetterwerte() {
         </span>
       </div>
 
-      <dl className="grid grid-cols-1 gap-5 md:grid-cols-3">
+      <p className="mb-4 text-sm text-[#5d7482]">Durchschnittswerte aus {boardCount} empfangenen Boards.</p>
+      <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {metrics.map((metric) => {
-          const reading = readings.find((item) => item.topic === metric.topic);
+          const value = metric.key === "fire"
+            ? fireDetected === undefined
+              ? "Warte auf Daten..."
+              : fireDetected
+                ? `Flamme erkannt${fireBoards.length ? ` (${fireBoards.join(", ")})` : ""}`
+                : "Keine Flamme"
+            : averages[metric.key as Exclude<SensorMetric, "fire">] === undefined
+              ? "Warte auf Daten..."
+              : `${averages[metric.key as Exclude<SensorMetric, "fire">]?.toFixed(1)} ${metric.unit}`;
+          const count = metric.key === "fire"
+            ? undefined
+            : sampleCounts[metric.key as Exclude<SensorMetric, "fire">];
 
           return (
             <div
-              key={metric.topic}
+              key={metric.key}
               className="min-h-[150px] rounded-xl border border-[#d5e3e9] border-t-4 border-t-[#5288a3] bg-[#dfeef8] p-6 text-left shadow-[0_12px_32px_rgba(36,81,105,0.09)]"
             >
               <dt className="text-sm font-medium text-[#567a93]">{metric.label}</dt>
               <dd className="mt-4 text-3xl font-semibold text-[#1f465d]">
-                {reading ? `${reading.payload}${metric.unit ? ` ${metric.unit}` : ""}` : "Warte auf Daten..."}
+                {value}
               </dd>
-              <p className="mt-3 text-xs text-[#567a93]">{metric.topic}</p>
+              {count !== undefined && <p className="mt-3 text-xs text-[#567a93]">Mittelwert aus {count} Boards</p>}
             </div>
           );
         })}
