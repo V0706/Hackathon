@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const insects = [
   { name: "schmetterling", emoji: "🦋", tone: "butterfly" },
   { name: "marienkäfer", emoji: "🐞", tone: "ladybird" },
@@ -14,7 +16,6 @@ const tips = [
   "Bienen besuchen am liebsten offene Blüten.",
   "Nach Regen lohnt sich ein Blick unter große Blätter.",
 ];
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -42,6 +43,13 @@ export default function Home() {
       >
         Zur Tiervorlage Seite
       </Link>
+      <Link
+        href="/feuer"
+        className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
+      >
+        Zur feuer Seite
+      </Link>
+      
     </div>
     
     
