@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const insects = [
   { name: "schmetterling", emoji: "🦋", tone: "butterfly" },
   { name: "marienkäfer", emoji: "🐞", tone: "ladybird" },
@@ -83,7 +85,14 @@ export default function Home() {
             <h2 id="insects-heading">Wer krabbelt und flattert?</h2>
           </div>
           <span className="insect-count">{insects.length} entdeckt</span>
-        </div>
+          <Link
+        href="/feuer"
+        className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
+      >
+        Zur feuer Seite
+      </Link>
+      
+    </div>
 
         <ul className="insect-grid">
           {insects.map((insect) => (
