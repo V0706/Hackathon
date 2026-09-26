@@ -14,28 +14,7 @@ export default function SecondPage() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          <div className="min-h-[150px] rounded-lg border border-[#d5e3e9] border-t-4 border-t-[#5288a3] bg-white p-6 text-left shadow-[0_12px_32px_rgba(36,81,105,0.09)]">
-            <p className="text-sm text-[#617783]">Temperatur:</p>
-          </div>
-          <div className="min-h-[150px] rounded-lg border border-[#d5e3e9] border-t-4 border-t-[#5288a3] bg-white p-6 text-left shadow-[0_12px_32px_rgba(36,81,105,0.09)]">
-            <p className="text-sm text-[#617783]">Helligkeit:</p>
-          </div>
-          <div className="min-h-[150px] rounded-lg border border-[#d5e3e9] border-t-4 border-t-[#5288a3] bg-white p-6 text-left shadow-[0_12px_32px_rgba(36,81,105,0.09)]">
-            <p className="text-sm text-[#617783]">Luftfeuchtigkeit:</p>
-          </div>
-          <div className="min-h-[150px] rounded-lg border border-[#d5e3e9] border-t-4 border-t-[#5288a3] bg-white p-6 text-left shadow-[0_12px_32px_rgba(36,81,105,0.09)]">
-            <p className="text-sm text-[#617783]">Bodenfeuchtigkeit:</p>
-          </div>
-          <div className="min-h-[150px] rounded-lg border border-[#d5e3e9] border-t-4 border-t-[#5288a3] bg-white p-6 text-left shadow-[0_12px_32px_rgba(36,81,105,0.09)]">
-            <p className="text-sm text-[#617783]">Feuer:</p>
-          </div>
-          <div className="min-h-[150px] rounded-lg border border-[#d5e3e9] border-t-4 border-t-[#5288a3] bg-white p-6 text-left shadow-[0_12px_32px_rgba(36,81,105,0.09)]">
-            <p className="text-sm text-[#617783]">Bewegungssensor:</p>
-          </div>
-        </div>
-
-        <div className="mt-8 text-center">
+        <div className="mt-8 flex justify-center">
           <MqttWetterwerte />
         </div>
 

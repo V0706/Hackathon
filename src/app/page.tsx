@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import MqttStartseitenwerte from "./MqttStartseitenwerte";
+import MqttWaldbrandGefahr from "./Waldbrand/MqttWaldbrandGefahr";
 
 export const metadata: Metadata = {
   title: "Waldmonitor | Waldanalyse",
@@ -87,39 +88,20 @@ export default function Home() {
             <MqttStartseitenwerte />
           </Link>
 
-          <Link
-            href="/Waldbrand"
-            className="group flex min-h-[370px] flex-col rounded-lg border border-t-4 border-[#e8dfd1] border-t-[#b67b48] bg-[#fffdfa] p-7 shadow-[0_12px_32px_rgba(70,51,31,0.09)] transition duration-200 hover:-translate-y-1 hover:border-[#c7a478] hover:shadow-[0_18px_36px_rgba(70,51,31,0.14)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a97943]"
-          >
-            <div className="mb-7 flex items-start justify-between gap-4">
+          <div className="group min-h-[370px] rounded-lg border border-t-4 border-[#e8dfd1] border-t-[#b67b48] bg-[#fffdfa] p-3 shadow-[0_12px_32px_rgba(70,51,31,0.09)] transition duration-200 hover:-translate-y-1 hover:border-[#c7a478] hover:shadow-[0_18px_36px_rgba(70,51,31,0.14)]">
+            <div className="mb-3 flex items-center justify-between gap-4">
               <span className="grid size-12 place-items-center rounded-md bg-[#f7ead8] text-[#a66d36]">
                 <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" className="size-7" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17.4 3.5c1 5-3.6 6.3-2.5 10.5 0 0-2.6-.7-3.2-3.2C8.4 14 7 17 7 20a9 9 0 0 0 18 0c0-5.5-4-9.7-7.6-16.5Z" />
                   <path d="M16.2 17.5c.4 2.3-2.1 3.4-2.1 5.2a2.9 2.9 0 0 0 5.8 0c0-1.8-1.2-3.4-3.7-5.2Z" />
                 </svg>
               </span>
-              <span className="mt-1 text-[#988d7e] transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
+              <Link href="/Waldbrand" className="mt-1 text-[#988d7e] transition-transform group-hover:translate-x-1" aria-label="Zur Waldbrandseite">
+                ↗
+              </Link>
             </div>
-            <p className="mb-2 text-xs font-bold uppercase text-[#98734c]">Risikoeinschätzung</p>
-            <h2 className="text-xl font-semibold text-[#403326]">Waldbrandgefahr</h2>
-            <p className="mt-2 text-sm text-[#776d61]">Aktuelles Gefahrenlevel</p>
-
-            <div className="mt-7 flex items-center justify-between gap-4 border-t border-[#eee7dc] pt-5">
-              <div>
-                <p className="text-xs text-[#81776b]">Gefahrenstufe</p>
-                <p className="mt-1 text-3xl font-semibold text-[#8d5b2d]">2 <span className="text-base font-medium text-[#887867]">/ 5</span></p>
-              </div>
-              <span className="rounded-md border border-[#ead5b7] bg-[#fbf0df] px-3 py-1.5 text-sm font-semibold text-[#8d5b2d]">Mäßig</span>
-            </div>
-            <div className="mt-4 grid grid-cols-5 gap-1.5" aria-label="Gefahrenstufe 2 von 5">
-              <span className="h-1.5 rounded-full bg-[#6d9a70]" />
-              <span className="h-1.5 rounded-full bg-[#c58b4c]" />
-              <span className="h-1.5 rounded-full bg-[#e7e3dc]" />
-              <span className="h-1.5 rounded-full bg-[#e7e3dc]" />
-              <span className="h-1.5 rounded-full bg-[#e7e3dc]" />
-            </div>
-            <p className="mt-auto pt-5 text-xs text-[#9a8e80]">Beispiel-Einstufung · keine Live-Warnung</p>
-          </Link>
+            <MqttWaldbrandGefahr />
+          </div>
 
           <Link
             href="/Tiere"

@@ -50,46 +50,32 @@ export default function MqttWetterwerte() {
   }, []);
 
   return (
-    <section className="w-full max-w-2xl text-left" aria-live="polite">
-      <div className="mb-4 flex items-center justify-between gap-4">
+    <section className="w-full max-w-5xl text-left" aria-live="polite">
+      <div className="mb-5 flex items-center justify-between gap-4 text-[#1f465d]">
         <h2 className="text-xl font-semibold">Live-MQTT-Daten</h2>
-        <p className="text-sm text-zinc-300">{status}</p>
+        <span className="rounded-full border border-[#bfd8ea] bg-[#ebf5fb] px-3 py-1 text-sm font-medium text-[#3f6a87]">
+          {status}
+        </span>
       </div>
-      <dl className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+
+      <dl className="grid grid-cols-1 gap-5 md:grid-cols-3">
         {metrics.map((metric) => {
           const reading = readings.find((item) => item.topic === metric.topic);
 
           return (
-            <div key={metric.topic} className="rounded-lg bg-zinc-800 p-4">
-              <dt className="text-sm text-zinc-300">{metric.label}</dt>
-              <dd className="mt-2 text-2xl font-semibold text-white">
+            <div
+              key={metric.topic}
+              className="min-h-[150px] rounded-xl border border-[#d5e3e9] border-t-4 border-t-[#5288a3] bg-[#dfeef8] p-6 text-left shadow-[0_12px_32px_rgba(36,81,105,0.09)]"
+            >
+              <dt className="text-sm font-medium text-[#567a93]">{metric.label}</dt>
+              <dd className="mt-4 text-3xl font-semibold text-[#1f465d]">
                 {reading ? `${reading.payload}${metric.unit ? ` ${metric.unit}` : ""}` : "Warte auf Daten..."}
               </dd>
-              <p className="mt-2 text-xs text-zinc-400">{metric.topic}</p>
+              <p className="mt-3 text-xs text-[#567a93]">{metric.topic}</p>
             </div>
           );
         })}
       </dl>
-      {readings.some((reading) => !metrics.some((metric) => metric.topic === reading.topic)) && (
-        <div className="mt-5">
-          <h3 className="mb-2 text-sm font-semibold text-zinc-200">Weitere Statusmeldungen</h3>
-        <ul className="space-y-3">
-          {readings.filter((reading) => !metrics.some((metric) => metric.topic === reading.topic)).map((reading) => (
-            <li key={reading.topic} className="rounded-lg bg-zinc-800 p-4">
-              <p className="mb-2 text-sm font-semibold text-zinc-200">
-                {reading.topic}
-              </p>
-              <pre className="overflow-x-auto whitespace-pre-wrap break-words text-sm text-white">
-                {reading.payload}
-              </pre>
-              <p className="mt-2 text-xs text-zinc-400">
-                Empfang: {new Date(reading.receivedAt).toLocaleTimeString()}
-              </p>
-            </li>
-          ))}
-        </ul>
-        </div>
-      )}
     </section>
   );
 }
