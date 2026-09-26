@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MqttWetterwerte from "./MqttWetterwerte";
 
 export default function SecondPage() {
   return (
@@ -7,20 +8,7 @@ export default function SecondPage() {
       <p className="mb-8 max-w-md text-lg text-zinc-300">
        Die aktuellen Wetterdaten aus dem Wald:
       </p>
-      <div className="grid grid-cols-2 gap-4 text-left">
-        <div className="flex h-[150px] w-[300px] items-start justify-start rounded-lg bg-blue-500 p-3">
-          <p>Temperatur:</p>
-        </div>
-        <div className="flex h-[150px] w-[300px] items-start justify-start rounded-lg bg-blue-500 p-3">
-          <p>Helligkeit:</p>
-        </div>
-        <div className="flex h-[150px] w-[300px] items-start justify-start rounded-lg bg-blue-500 p-3">
-          <p>Luftfeuchtigkeit:</p>
-        </div>
-        <div className="flex h-[150px] w-[300px] items-start justify-start rounded-lg bg-blue-500 p-3">
-          <p>Bodenfeuchtigkeit:</p>
-        </div>
-      </div>
+      <MqttWetterwerte />
       <div>
         <p></p>
       </div>

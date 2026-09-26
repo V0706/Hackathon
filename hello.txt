@@ -2,3 +2,6 @@ hello
 hi
 skdn
 https://www.w3schools.com/react/react_router.asp
+
+host: Wetter, user: admin, 172.16.1.242,
+adresse: garten/status/#
