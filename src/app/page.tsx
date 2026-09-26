@@ -120,20 +120,9 @@ export default function Home() {
               <span className="mt-1 text-[#82918b] transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
             </div>
             <p className="mb-2 text-xs font-bold uppercase text-[#638078]">Fauna &amp; Bewegung</p>
-            <h2 className="text-xl font-semibold text-[#203b34]">Tierbeobachtung</h2>
+            <h2 className="text-xl font-semibold text-[#203b34]">Tiere im Wald</h2>
             <p className="mt-2 text-sm text-[#697770]">Aktivität im Beobachtungsgebiet</p>
-
-            <div className="mt-7 grid grid-cols-2 gap-3 border-t border-[#e6ece9] pt-5">
-              <div>
-                <p className="text-xs text-[#748078]">Sichtungen</p>
-                <p className="mt-1 text-2xl font-semibold text-[#315d50]">12</p>
-              </div>
-              <div>
-                <p className="text-xs text-[#748078]">Arten erkannt</p>
-                <p className="mt-1 text-2xl font-semibold text-[#315d50]">4</p>
-              </div>
-            </div>
-            <p className="mt-auto pt-5 text-xs text-[#89948e]">Beispielbeobachtungen · letzte 24 Stunden</p>
+            <p className="mt-auto pt-5 text-xs text-[#89948e]">Mehr Details auf der Tierseite</p>
           </Link>
         </section>
 
