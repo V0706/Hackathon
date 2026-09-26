@@ -2,24 +2,39 @@ import Link from "next/link";
 
 export default function SecondPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-zinc-900 px-6 py-16 text-center text-white">
-        <h1 className="mb-6 text-4xl font-bold">Waldbrandgefahr</h1>
-        <div className="flex gap-6">
-          <div>
-            <h2>Wie entstehen Waldbrände?</h2>
-            <p>Waldbrände entstehen durch verschiedene Ursachen, darunter natürliche Faktoren wie Blitzschläge und menschliche Aktivitäten wie unkontrollierte Feuer oder Abbrand.</p>
+    <main className="min-h-screen bg-[linear-gradient(180deg,#f5eceb_0%,#fbf7f6_100%)] px-5 py-12 text-[#422e2d] sm:px-8 sm:py-16">
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-10 text-center sm:mb-14">
+          <h1 className="text-4xl font-semibold leading-tight text-[#6e302e] sm:text-5xl">Waldbrände</h1>
+          <h2 className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-[#826462] sm:text-base">Gefahr für Pflanzen und Tiere.</h2>
+        </header>
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
+            <h2 className="text-xl font-semibold text-[#4a302e]">Wie entstehen Waldbrände?</h2>
+            <p className="mt-3 text-sm leading-6 text-[#77615e]">Waldbrände entstehen durch verschiedene Ursachen, darunter natürliche Faktoren wie Blitzschläge und menschliche Aktivitäten wie unkontrollierte Feuer oder Abbrand.</p>
           </div>
-          <div>
-            <h2>Wie kann man Waldbrände verhindern?</h2>
-            <p>Um Waldbrände zu verhindern, ist es wichtig, vorsichtig mit Feuer umzugehen, keine offenen Flammen in Waldgebieten zu verwenden und auf die Einhaltung von Brandschutzvorschriften zu achten.</p>
+          <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
+            <h2 className="text-xl font-semibold text-[#4a302e]">Wie kann man Waldbrände verhindern?</h2>
+            <p className="mt-3 text-sm leading-6 text-[#77615e]">Um Waldbrände zu verhindern, ist es wichtig, vorsichtig mit Feuer umzugehen, keine offenen Flammen in Waldgebieten zu verwenden und auf die Einhaltung von Brandschutzvorschriften zu achten.</p>
+          </div>
+          <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
+            <h2 className="text-xl font-semibold text-[#4a302e]">Welche Bedingungen für Waldbrände sind aktuellerfüllt?</h2>
+            <p className="mt-3 text-sm leading-6 text-[#77615e]">platzhalter für sensor</p>
+          </div>
+          <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
+            <h2 className="text-xl font-semibold text-[#4a302e]">Brennt es gerade?</h2>
+            <p className="mt-3 text-sm leading-6 text-[#77615e]">platzhalter für sensor</p>
           </div>
         </div>
-      <Link
-        href="/"
-       className="rounded-full bg-white px-6 py-3 text-black transition hover:bg-zinc-300"
-      >
-        Zurück zur Hauptseite
-      </Link>
+        <div className="mt-8 text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center rounded-md border border-[#ead8d4] bg-white/75 px-4 py-2 text-sm font-medium text-[#8a4945] transition hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a4514a]"
+          >
+            Zurück zur Hauptseite
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }
