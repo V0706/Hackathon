@@ -91,7 +91,18 @@ export default function Home() {
       >
         Zur feuer Seite
       </Link>
-      
+      <Link
+        href="/second"
+        className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
+      >
+        Zur wetter Seite
+      </Link>
+      <Link
+        href="/third"
+        className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-zinc-700"
+      >
+        Zur tier Seite
+      </Link>
     </div>
 
         <ul className="insect-grid">
