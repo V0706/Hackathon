@@ -161,87 +161,59 @@ export default function MqttWaldbrandGefahr() {
   const dangerLevels = [1, 2, 3, 4, 5];
 
   return (
-    <section className="w-full max-w-5xl rounded-2xl border border-[#ead8d4] bg-[#fffdfc] p-6 shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#8a4945]">Waldbrandgefahr</p>
-          <h2 className="mt-1 text-2xl font-semibold text-[#422e2d]">Live-Berechnung</h2>
-        </div>
-        <span className="rounded-full border border-[#ecc9c3] bg-[#f9efee] px-3 py-1 text-sm font-medium text-[#8a4945]">
+    <section className="w-full text-left">
+      <div className="mb-2 flex items-center justify-between gap-4">
+        <p className="mb-2 text-xs font-bold uppercase text-[#98734c]">Risikoeinschätzung</p>
+        <span className="rounded-full border border-[#ecc9c3] bg-[#f9efee] px-2 py-0.5 text-[10px] font-medium text-[#8a4945]">
           {status}
         </span>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-xl border border-[#ead8d4] bg-[#fff7f5] p-4">
-          <p className="text-sm text-[#7a5f5d]">Temperatur</p>
-          <p className="mt-3 text-2xl font-semibold text-[#422e2d]">
-            {risk.temperature !== undefined ? `${risk.temperature.toFixed(1)} °C` : "--"}
-          </p>
-        </div>
+      <h2 className="text-xl font-semibold text-[#403326]">Waldbrandgefahr</h2>
+      <p className="mt-2 text-sm text-[#776d61]">Aktuelles Gefahrenlevel</p>
 
-        <div className="rounded-xl border border-[#ead8d4] bg-[#fff7f5] p-4">
-          <p className="text-sm text-[#7a5f5d]">Luftfeuchtigkeit</p>
-          <p className="mt-3 text-2xl font-semibold text-[#422e2d]">
-            {risk.humidity !== undefined ? `${risk.humidity.toFixed(1)} %` : "--"}
+      <div className="mt-7 flex items-center justify-between gap-4 border-t border-[#eee7dc] pt-5">
+        <div>
+          <p className="text-xs text-[#81776b]">Gefahrenstufe</p>
+          <p className="mt-1 text-3xl font-semibold text-[#8d5b2d]">
+            {risk.ready ? (
+              <>
+                {risk.level} <span className="text-base font-medium text-[#887867]">/ 5</span>
+              </>
+            ) : (
+              <span className="text-base font-medium text-[#887867]">--</span>
+            )}
           </p>
         </div>
-
-        <div className="rounded-xl border border-[#ead8d4] bg-[#fff7f5] p-4">
-          <p className="text-sm text-[#7a5f5d]">Bodenfeuchte</p>
-          <p className="mt-3 text-2xl font-semibold text-[#422e2d]">
-            {risk.soilMoisture !== undefined ? `${risk.soilMoisture.toFixed(1)} %` : "--"}
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-[#ead8d4] bg-[#fff7f5] p-4">
-          <p className="text-sm text-[#7a5f5d]">Flammensensor</p>
-          <p className="mt-3 text-2xl font-semibold text-[#422e2d]">
-            {risk.flame === undefined ? "--" : risk.flame ? "Ja" : "Nein"}
-          </p>
-        </div>
+        <span className="rounded-md border border-[#ead5b7] bg-[#fbf0df] px-3 py-1.5 text-sm font-semibold text-[#8d5b2d]">
+          {risk.ready ? risk.label : "Warte..."}
+        </span>
       </div>
 
-      <div className="mt-6 rounded-xl border border-[#ead8d4] bg-[#fff7f5] p-5">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-sm text-[#7a5f5d]">Gefahrenstufe</p>
-            <p className="mt-1 text-4xl font-bold text-[#6e302e]">
-              {risk.ready ? `${risk.level} / 5` : "--"}
-            </p>
-          </div>
-          <p className="text-lg font-semibold text-[#6e302e]">
-            {risk.ready ? risk.label : "Warten auf Messdaten"}
-          </p>
-        </div>
-
-        <div className="mt-4 flex gap-2">
-          {dangerLevels.map((level) => (
-            <div
-              key={level}
-              className={`h-3 flex-1 rounded-full ${
-                risk.ready && risk.level >= level
-                  ? level === 1
-                    ? "bg-[#8ab38d]"
-                    : level === 2
-                      ? "bg-[#d7b166]"
-                      : level === 3
-                        ? "bg-[#ea9a52]"
-                        : level === 4
-                          ? "bg-[#d86d4a]"
-                          : "bg-[#a73939]"
-                  : "bg-[#f0e7e3]"
-              }`}
-            />
-          ))}
-        </div>
-
-        <p className="mt-4 text-sm leading-6 text-[#7a5f5d]">
-          Berechnung: 35 % Temperatur, 25 % Luftfeuchtigkeit, 25 % Bodenfeuchte, 15 % Flammensensor.
-          <br />
-          Niedrige Bodenfeuchte, hohe Temperatur, trockene Luft und ein aktivierter Flammensensor erhöhen die Gefahr.
-        </p>
+      <div className="mt-4 grid grid-cols-5 gap-1.5" aria-label="Gefahrenstufe">
+        {dangerLevels.map((level) => (
+          <span
+            key={level}
+            className={`h-1.5 rounded-full ${
+              risk.ready && risk.level >= level
+                ? level === 1
+                  ? "bg-[#6d9a70]"
+                  : level === 2
+                    ? "bg-[#c58b4c]"
+                    : level === 3
+                      ? "bg-[#d98f4d]"
+                      : level === 4
+                        ? "bg-[#d86d4a]"
+                        : "bg-[#a73939]"
+                : "bg-[#e7e3dc]"
+            }`}
+          />
+        ))}
       </div>
+
+      <p className="mt-auto pt-5 text-xs text-[#9a8e80]">
+        {risk.ready ? `${risk.label} · live berechnet` : "Warte auf Messdaten"}
+      </p>
     </section>
   );
 }
