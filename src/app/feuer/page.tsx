@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function SecondPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-zinc-900 px-6 py-16 text-center text-white">
-        <h1 className="mb-6 text-4xl font-bold">Feuer</h1>
+        <h1 className="mb-6 text-4xl font-bold">Waldbran</h1>
       <Link
         href="/"
        className="rounded-full bg-white px-6 py-3 text-black transition hover:bg-zinc-300"
