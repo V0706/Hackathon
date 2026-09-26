@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MqttWaldbrandGefahr from "./MqttWaldbrandGefahr";
 
 export default function SecondPage() {
   return (
@@ -6,11 +7,19 @@ export default function SecondPage() {
       <div className="mx-auto max-w-6xl">
         <header className="mb-10 text-center sm:mb-14">
           <h1 className="text-4xl font-semibold leading-tight text-[#6e302e] sm:text-5xl">Waldbrände</h1>
-          <h2 className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-[#826462] sm:text-base">Gefahr für Pflanzen und Tiere.</h2>
+          <h2 className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-[#826462] sm:text-base">
+            Gefahr für Pflanzen und Tiere.
+          </h2>
         </header>
+
+        <div className="mb-8">
+          <MqttWaldbrandGefahr />
+        </div>
+
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
             <h2 className="text-xl font-semibold text-[#4a302e]">Wie entstehen Waldbrände?</h2>
+<<<<<<< HEAD
             <p className="mt-3 text-sm leading-6 text-[#77615e]">Waldbrände werden begünstigt, wenn es besonders warm und trocken ist. Natürliche Ursachen wie Blitzeinschläge lösen selten Waldbrände aus. Viel eher werden sie durch Menschen verursacht, wie etwa durch vorsätzliche Brandstiftung oder unkontrollierte Feuer. Auch Zigarretten, die achtlos weggeworfen wurden und heiße Fahrzeugkatalysatoren können Waldbrände verursachen.</p>
           </div>
           <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
@@ -27,8 +36,20 @@ export default function SecondPage() {
           <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
             <h2 className="text-xl font-semibold text-[#4a302e]">Brennt es gerade?</h2>
             <p className="mt-3 text-sm leading-6 text-[#77615e]">Platzhalter für Sensor:</p>
+=======
+            <p className="mt-3 text-sm leading-6 text-[#77615e]">
+              Waldbrände entstehen durch verschiedene Ursachen, darunter natürliche Faktoren wie Blitzschläge und menschliche Aktivitäten wie unkontrollierte Feuer oder Abbrand.
+            </p>
+          </div>
+          <div className="min-h-[220px] rounded-lg border border-[#ead8d4] border-t-4 border-t-[#b45d55] bg-[#fffdfc] p-6 text-left shadow-[0_12px_32px_rgba(93,45,40,0.09)]">
+            <h2 className="text-xl font-semibold text-[#4a302e]">Wie kann man Waldbrände verhindern?</h2>
+            <p className="mt-3 text-sm leading-6 text-[#77615e]">
+              Um Waldbrände zu verhindern, ist es wichtig, vorsichtig mit Feuer umzugehen, keine offenen Flammen in Waldgebieten zu verwenden und auf die Einhaltung von Brandschutzvorschriften zu achten.
+            </p>
+>>>>>>> 78d84a98d8f945ece57af9df2e996cf10223c778
           </div>
         </div>
+
         <div className="mt-8 text-center">
           <Link
             href="/"
